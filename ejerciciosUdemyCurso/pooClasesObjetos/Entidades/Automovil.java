@@ -1,4 +1,7 @@
-package pooClasesObjetos;
+package pooClasesObjetos.Entidades;
+
+import pooClasesObjetos.Enums.ColorEnum;
+import pooClasesObjetos.Enums.TipoAutoEnum;
 
 public class Automovil {
 	
@@ -6,8 +9,10 @@ public class Automovil {
 	private String fabircante;
 	private String modelo;
 	private ColorEnum color= ColorEnum.GRIS;
-	private double cilindrada;
-	private int capacidadTanque=40;
+	private Motor motor;
+	private Tanque capacidadTanque;
+	private Persona conductor;
+	private Rueda[] ruedas;
 	
 	private TipoAutoEnum tipo;
 	
@@ -37,16 +42,22 @@ public class Automovil {
 		this.color = color;
 	}
 	
-	public Automovil(String fabircante, String modelo, ColorEnum color, double cilindrada) {
+	public Automovil(String fabircante, String modelo, ColorEnum color, Motor motor) {
 		this(fabircante,modelo,color);
-		this.cilindrada = cilindrada;
+		this.motor = motor;
 	}
 	
-	public Automovil(String fab, String modelo, ColorEnum color, double cilindrada, int capacidadTanque) {
-		this(fab,modelo,color,cilindrada);
+	public Automovil(String fab, String modelo, ColorEnum color, Motor motor, Tanque capacidadTanque) {
+		this(fab,modelo,color,motor);
 		this.capacidadTanque = capacidadTanque;
 	}
-	
+
+	public Automovil(String fabircante, String modelo, ColorEnum color, Motor motor, Tanque capacidadTanque,
+			Persona conductor, Rueda[] ruedas) {
+		this(fabircante,modelo,color,motor,capacidadTanque);
+		this.conductor = conductor;
+		this.ruedas = ruedas;
+	}
 
 	public String getFabricante() {
 		return this.fabircante;
@@ -72,19 +83,10 @@ public class Automovil {
 		this.color= color;
 	}	
 	
-	public double getCilindrada() {
-		return this.cilindrada;
-	}
-	
-	public void setCilindrada (double cilindrada) {
-		this.cilindrada= cilindrada;
-	}
-	
-	
-	public double getCapacidadtanque() {
+	public Tanque getCapacidadtanque() {
 		return this.capacidadTanque;
 	}
-	public void setCapacidadtanque (int captanque) {
+	public void setCapacidadtanque (Tanque captanque) {
 		this.capacidadTanque= captanque;
 	}
 	
@@ -96,15 +98,6 @@ public class Automovil {
 		Automovil.colorPatente = colorPatente;
 	}
 	
-
-	public static int getCapacidadTanqueEstatico() {
-		return capacidadTanqueEstatico;
-	}
-
-	public static void setCapacidadTanqueEstatico(int capacidadTanqueEstatico) {
-		Automovil.capacidadTanqueEstatico = capacidadTanqueEstatico;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -120,6 +113,31 @@ public class Automovil {
 	public void setTipo(TipoAutoEnum tipo) {
 		this.tipo = tipo;
 	}
+	
+
+	public Motor getMotor() {
+		return motor;
+	}
+
+	public void setMotor(Motor motor) {
+		this.motor = motor;
+	}
+
+	public Persona getConductor() {
+		return conductor;
+	}
+
+	public void setConductor(Persona conductor) {
+		this.conductor = conductor;
+	}
+
+	public Rueda[] getRuedas() {
+		return ruedas;
+	}
+
+	public void setRuedas(Rueda[] ruedas) {
+		this.ruedas = ruedas;
+	}
 
 	public String verDetalle() {
 		
@@ -129,8 +147,9 @@ public class Automovil {
 				"\nauto.modelo :"+ this.modelo+
 				"\nauto.TipoAuto :"+ this.getTipo().getDescripcion()+
 				"\nauto.color :"+ this.color+
-				"\nauto.cilindrada :"+ this.cilindrada+
+				"\nauto.motor :"+ this.motor+
 				"\nauto.patenteColor :"+ Automovil.colorPatente+//por ser estatica
+				"\nauto.cilindrada :"+ this.motor.getCilindrada()+
 				"\n-----------------------------";
 	}
 	
@@ -148,7 +167,7 @@ public class Automovil {
 	}
 	
 	public double calcularConsumo (int km, float porcentajeGasolina) {
-		return km/(porcentajeGasolina*this.capacidadTanque);
+		return km/(porcentajeGasolina*this.capacidadTanque.getCapacidad());
 	}
 	
 	public static double calcularConsumoEstatico (int km, int porcentajeGasolina) {
@@ -156,7 +175,7 @@ public class Automovil {
 	}
 	
 	public double calcularConsumo (int km, int porcentajeGasolina) {
-		return km/((porcentajeGasolina/100f)*this.capacidadTanque);
+		return km/((porcentajeGasolina/100f)*this.capacidadTanque.getCapacidad());
 	}
 
 	@Override //sobre escritura del metodo equals para que no compare por la ubicación de memoria sino por fabricante y modelo
@@ -178,7 +197,7 @@ public class Automovil {
 	@Override
 	public String toString() {
 		return "Automovil [id=" + id + ", fabircante=" + fabircante + ", modelo=" + modelo + ", color=" + color
-				+ ", cilindrada=" + cilindrada + ", capacidadTanque=" + capacidadTanque + "]";
+				+ ", motor=" + motor + ", capacidadTanque=" + capacidadTanque + "]";
 	}
 
 	

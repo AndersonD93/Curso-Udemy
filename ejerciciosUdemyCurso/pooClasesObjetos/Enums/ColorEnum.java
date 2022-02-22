@@ -1,4 +1,4 @@
-package pooClasesObjetos;
+package pooClasesObjetos.Enums;
 
 public enum ColorEnum {
 	

@@ -2,14 +2,24 @@ package pooClasesObjetos;
 
 import java.util.Date;
 
+import pooClasesObjetos.Entidades.Automovil;
+import pooClasesObjetos.Entidades.Motor;
+import pooClasesObjetos.Entidades.Tanque;
+import pooClasesObjetos.Enums.ColorEnum;
+import pooClasesObjetos.Enums.TipoMotorEnum;
+
 public class AutomovilMain {
 
 	public static void main(String[] args) {
 		
 		Automovil subaru = new Automovil("Subaru","Impreza");
-
-		subaru.setCilindrada(2.0);
-		//subaru.setColor("Blanco");
+		Motor motorsubaru = new Motor(2.0,TipoMotorEnum.DIESEL);
+		
+		subaru.setMotor(new Motor(2.0,TipoMotorEnum.DIESEL)); //Opción uno creando el objeto directamente en el set
+		subaru.setMotor(motorsubaru); // Opción dos instanciandolo y pasandolo como parametro
+		subaru.setColor(ColorEnum.BLANCO);
+		subaru.setCapacidadtanque(new Tanque(50));
+		
 		
 		Automovil mazda = new Automovil();
 		
