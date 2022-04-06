@@ -1,0 +1,11 @@
+<input type="text" name=""username" value="jhon.doe">
+<input type="password" name=""username" value="1234">
+<textareaname='experiencia' cols='5'rows='9'>Mas de 10 años de experiencia...</textarea>
+<input type="email" name=""email" value="jhon.doe@correo.com">
+<input type="number" name=""edad" value="28">
+<select name='Lenguaje'>
+<option value='1' selected>Java</option
+<option value='2>Python</option
+<option value='3>JavaScript</option
+<option value='4>PHP</option
+<option value='5>TypeScript</option</select>
